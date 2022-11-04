@@ -1,117 +1,105 @@
 package echec;
 
 import java.util.List;
+
+import model.Roi;
+
 import java.util.ArrayList;
 
-public class Joueur{
+public class Joueur {
+
 	private String nom;
 	private Couleur couleur;
-	 List<Piece> tab=new ArrayList<Piece>();
-
+	private List<Piece> tab = new ArrayList<Piece>();
+	// private manquant devant list + indentation
 	private Couleur couleurEnnemie;
 
-	Joueur (String n, Couleur c)
+	public Joueur(String n, Couleur c)
+	// public doit etre devant le constructeur
 	{
-		nom=n;
-		couleur=c;
+		nom = n;
+		couleur = c;
 	}
 
-	public Couleur getCouleur()
-	{
+	public Couleur getCouleur() {
 		return couleur;
 	}
 
-
-	public void updateTab()
-	{
-		if (couleur.equals(Couleur.BLACK))
-		{
-			tab=Piece.getBlackPiece();
-			couleurEnnemie=Couleur.BLACK;
-			
-		}
-		 else
-		 {
-			 tab=Piece.getWhitePiece();		 
-			 couleurEnnemie=Couleur.WHITE;
-
-		 }
-
+	public List<Piece> getTab() {
+		return tab;
 	}
 
+	public Couleur getCouleurEnnemie() {
+		return couleurEnnemie;
+	}
 
+	public void updateTab() {
+		if (couleur.equals(Couleur.BLACK)) {
+			tab = Piece.getBlackPiece();
+			couleurEnnemie = Couleur.BLACK;
+
+		} else {
+			tab = Piece.getWhitePiece();
+			couleurEnnemie = Couleur.WHITE;
+
+		}
+
+	}
 
 	public String getNom() {
 		return nom;
 	}
 
-
-
-
-
-	public void abandonner(){
-
+	public void abandonner() {
+		// Pas d'instruction
 	}
 
-
-
-
-
 	public Piece bougerT1(Position depart) {
-		Piece selectionnee=null;
-		boolean ok=false;
-		for (Piece count: tab)
-		{
-			 if (depart.equals(count.getPosition()))
-			 {
-				 selectionnee=count;
-				 ok=true;
-				 System.out.println(count.getMouvementPossible());
-				 break;
-			 }
-
+		Piece selectionnee = null;
+		boolean ok = false;
+		for (Piece count : tab) {
+			if (depart.equals(count.getPosition())) {
+				selectionnee = count;
+				ok = true;
+				System.out.println(count.getMouvementPossible());
+				break;
+			}
 
 		}
 		if (!ok)
-			System.out.println("Position erron�e, rejouer");
+			System.out.println("Position erronee, rejouer");
 		return selectionnee;
 
 	}
+
 	public Piece bougerRoiT1(Position depart) {
-		Piece selectionnee=null;
-		boolean ok=false;
-		if (depart.equals(Roi.getRoiCouleur(couleur).getPosition()))
-		{
-			selectionnee=Roi.getRoiCouleur(couleur);
-			ok=true;
+		Piece selectionnee = null;
+		boolean ok = false;
+		if (depart.equals(Roi.getRoiCouleur(couleur).getPosition())) {
+			selectionnee = Roi.getRoiCouleur(couleur);
+			ok = true;
 			System.out.println(selectionnee.getMouvementPossible());
 
 		}
 
-
-
 		if (!ok)
-			System.out.println("Position erron�e, rejouer");
+			System.out.println("Position erronee, rejouer");
 		return selectionnee;
 
 	}
 
-	public boolean bougerT2(Piece selectionnee, Position depart,Position arrivee) {
+	public boolean bougerT2(Piece selectionnee, Position depart, Position arrivee) {
 
-		boolean tentative=selectionnee.bouger(arrivee); 						
-		if (tentative)
-		{
-			for (Piece count: Piece.getColoredPiece(couleurEnnemie)  )
-			{
-				if(count.getPosition().equals(arrivee))
-				{
-					count.destroy();											
+		boolean tentative = selectionnee.bouger(arrivee);
+		if (tentative) {
+			for (Piece count : Piece.getColoredPiece(couleurEnnemie)) {
+				if (count.getPosition().equals(arrivee)) {
+					count.destroy();
 					break;
 				}
 			}
-		}
-		else
-			System.out.println("Erreur d'arriv�e");
+		} else
+			System.out.println("Erreur d'arrivee");
 		return tentative;
 	}
 
@@ -119,9 +107,5 @@ public class Joueur{
 	public String toString() {
 		return "Joueur [nom=" + nom + ", couleur=" + couleur + "]";
 	}
-
-
-
-
 
 }

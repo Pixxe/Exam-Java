@@ -2,9 +2,10 @@ package echec;
 
 import java.util.List;
 
-interface Mouvement {
+//Ajouter public devant interface
+public interface Mouvement {
 
-	
-	List<Position> getMouvementPossible();
-	
+	//Ajouter public devant la méthode
+	public List<Position> getMouvementPossible();
+
 }

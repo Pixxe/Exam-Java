@@ -1,18 +1,26 @@
-package echec;
-import java.util.*;
+
+package model;
+
+//Il ne faut pas importer tous les utilitaires pour rendre la compilation et le projet plus optimal
+import java.util.ArrayList;
+import java.util.List;
+
+import echec.Couleur;
+import echec.Mouvement;
+import echec.Piece;
+import echec.Position;
+
 public class Cavalier  extends Piece implements Mouvement {
 
 	public Cavalier(int x, int y, Couleur c) {
 		super(x, y, c);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public List<Position> getMouvementPossible() {
-		// TODO Auto-generated method stub
 
-		int x=position.getX();
-		int y=position.getY();
+		int x=getPosition().getX();
+		int y=getPosition().getY();
 		Position temp=new Position(x,y);
 		List<Position> mouvementPossible = new ArrayList<Position>();
 
@@ -36,7 +44,7 @@ public class Cavalier  extends Piece implements Mouvement {
 
 	@Override
 	public String toString() {
-		return "[Cavalier "+super.position.getX()+","+super.position.getY()+"]" ;
+		return "[Cavalier "+super.getPosition().getX()+","+super.getPosition().getY()+"]" ;
 	}
 
 }
